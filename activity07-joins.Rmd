@@ -1,6 +1,6 @@
 ---
 title: "Activity 7"
-author: "Name"
+author: "Sara Knight"
 output: github_document
 ---
 
@@ -230,7 +230,8 @@ Which US state(s) has/ve the fewest Denny's location?
 ```{r fewest_dennys}
 
 dennys %>% 
-  group_by(state)
+  group_by(state) %>% 
+  count(state, sort = TRUE)
 
   
 ```
@@ -238,19 +239,28 @@ dennys %>%
 
 
 **Response**:
+Delaware has the fewest Denny's locations with one.
 
 
 Which US state(s) has/ve the fewest La Quinta locations?
 
+```{r fewest_laquinta}
+
+laquinta_us %>% 
+  group_by(state) %>% 
+  count(state, sort = TRUE)
+  #arrange(state)
+```
 
 
 
 **Response**:
+Technically Delaware and Hawaii have no La Quintas, but Maine has only one.
 
 
 Is this surprising to you? Why or why not?
 
-**Response**:
+**Response**: It is not surprising that a small state has only one Denny's, but no La Quinta's. I think what is more surprising is that there is a Denny's in Hawaii.
 
 
 ### Locations per thousand square miles
@@ -267,7 +277,19 @@ To do this, we will need to join each company's tibble with the information in t
   Therefore, we will need to specify that the `state` variable from the `dennys` tibble should be matched `by` the `abbreviation` variable from the `states` tibble.
 3. *Then*, calculate the number of Denny's locations *per* thousand square miles.
 
+```{r dennys_per_state}
+dennys_per_state <- dennys %>% 
+  group_by(state) %>% 
+  count(state, sort = TRUE)
 
+```
+
+```{r joining_dennys_with_states}
+
+dennys_state <- dennys_per_state %>% 
+  inner_join(states, by = c("state" = "abbreviation"))
+
+```
 
 
 Which states have the most Denny's locations per thousand square miles?

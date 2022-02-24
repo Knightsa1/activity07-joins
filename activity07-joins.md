@@ -1,6 +1,6 @@
 Activity 7
 ================
-Name
+Sara Knight
 
 ## Data and packages
 
@@ -333,10 +333,11 @@ Which US state(s) has/ve the fewest Denny’s location?
 
 ``` r
 dennys %>% 
-  group_by()
+  group_by(state)
 ```
 
     ## # A tibble: 1,643 x 6
+    ## # Groups:   state [51]
     ##    address                       city             state zip   longitude latitude
     ##    <chr>                         <chr>            <chr> <chr>     <dbl>    <dbl>
     ##  1 2900 Denali                   Anchorage        AK    99503    -150.      61.2
