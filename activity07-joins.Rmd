@@ -291,20 +291,44 @@ dennys_state <- dennys_per_state %>%
 
 ```
 
+```{r dennys_per_1000mi}
+
+dennys_state %>% 
+  mutate(dennys_per_1000mi = n / area) %>% 
+  arrange(desc(dennys_per_1000mi))
+```
 
 Which states have the most Denny's locations per thousand square miles?
 
-**Response**:
+**Response**: DC or Rhode Island have the most Denny's location per 1000 miles.
 
 
 #### La Quinta
 
 Similarly as we previously did for Denny's, calculate the number of La Quinta locations *per* thousand square miles.
 
+```{r laquinta_per_state}
 
+laquinta_per_state <- laquinta_us %>% 
+  group_by(state) %>% 
+  count(state, sort = TRUE)
 
+```
 
-**Response**:
+```{r joining_laquinta_with_states}
+
+laquinta_states <- laquinta_per_state %>% 
+  inner_join(states, by = c("state" = "abbreviation"))
+
+```
+
+```{r laquinta_per_1000mi}
+laquinta_states %>% 
+  mutate(laquinta_per_1000mi = n / area) %>% 
+  arrange(desc(laquinta_per_1000mi))
+```
+
+**Response**: Rhode Island has the moste La Quintas per 1000 square miles.
 
 
 
